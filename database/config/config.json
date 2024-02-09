@@ -1,0 +1,27 @@
+{
+  "development": {
+    "username": "root",
+    "password": "",
+    "database": "grupo_2_sweetmakeup",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "define": {
+      "created_at": "createdAt",
+      "updated_at": "updatedAt"
+    }
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "admin",
+    "password": "makeup123",
+    "database": "grupo_2_sweetmakeup",
+    "host": "makeup-db.crlfnmdirgdd.sa-east-1.rds.amazonaws.com",
+    "dialect": "mysql"
+  }
+}

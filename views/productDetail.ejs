@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("partials/head") %>
+    <link rel="stylesheet" href="/css/productDetail.css" />
+    <script defer src="/js/addToCart.js"></script>
+    <script defer src="/js/thumbnailGallery.js"></script>
+    <title>Make.u |
+        <%= product.name%>
+    </title>
+</head>
+
+<body>
+    <!-- Barra de navegacion principal -->
+    <%- include('partials/header') %>
+
+    <main class="container-fluid container-color-detail">
+        <!-- Modal -->
+        <div class="modal" id="addToCartOk" tabindex="-1" role="dialog" aria-labelledby="addToCartOk"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        El producto fue agregado a tu carrito!
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-pink" data-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Modal -->
+
+        <div class="row">
+            <div class="col-12 padding-row-detail">
+                <a href="/<%= product.category.name %>"><i class="fas fa-long-arrow-alt-left icon-arrow"><span
+                            class="pd-arrow">Volver a</span><span class="upper-first-letter">
+                            <%= product.category.name %></span></i></a>
+            </div>
+            <div class="col-12 col-md-6 d-flex justify-content-center align-items-start">
+                <article class="product-card-principal card">
+                    <div class="d-flex justify-content-center">
+                        <% if (product.images.length > 0) { %>
+                        <img id="mainImg" class="img-fluid card-img-top mh-50 img-detail-product"
+                            src="/img/products/<%= product.images[0].route%>" alt="<%= product.name %>" />
+                        <% } else { %>
+                        <img class="card-img-top mh-50" src="https://amp.ampifyme.com/no_image_placeholder.png" alt="">
+                        <% } %>
+                    </div>
+
+                    <div class="row p-1 m-0 d-flex justify-content-center">
+                        <% if (product.images.length > 1) { %>
+                        <% for( let image of product.images ) { %>
+                        <img class="col-3 img-fluid img-thumbnail thumbnail" src="/img/products/<%= image.route %> "
+                            alt="Imagen del producto" />
+                        <% } %>
+                        <% } %>
+                    </div>
+                </article>
+            </div>
+
+            <div class="productDetails col p-2">
+                <% for (let tag of product.tags) { %>
+                <a class="tag-style" href="/tags/<%= tag.id %>"><%= tag.name %></a>
+                <% } %>
+                <h1 class="card-title">
+                    <%= product.name%>
+                </h1>
+                <p class="price-style">
+                    $
+                    <%= toThousand(Math.round(product.price * (1 - (product.discount)/100))) %>
+                </p>
+                <% if (product.discount > 0) { %>
+                <p> Este producto tiene <%= Math.floor(product.discount) %>% de descuento!
+                </p>
+                <% } %>
+                <h2 class="subtitle-detail">Marca</h2>
+                <a href="/brands/<%= product.brand.id %>">
+                    <p><%= product.brand.name %></p>
+                </a>
+
+
+                <a class="inline-block-detail width-content d-flex justify-content-between" data-toggle="collapse"
+                    href="#collapseDescription" role="button" aria-expanded="false" aria-controls="collapseDescription">
+                    <span class="subtitle-detail">Descripcion</span>
+                    <i class="fas fa-plus plus-icon d-flex justify-content-center"></i>
+                </a>
+                <div class="collapse width-content" id="collapseDescription">
+                    <div class="card card-body">
+                        <%= product.description%>
+                    </div>
+                </div>
+
+                <a class="inline-block-detail width-content d-flex justify-content-between" data-toggle="collapse"
+                    href="#collapseIngredients" role="button" aria-expanded="false" aria-controls="collapseIngredients">
+                    <span class="subtitle-detail">Ingredientes</span>
+                    <i class="fas fa-plus plus-icon"></i>
+                </a>
+                <div class="collapse width-content" id="collapseIngredients">
+                    <div class="card card-body">
+                        <%= product.ingredients %>
+                    </div>
+                </div>
+
+                <a class="inline-block-detail width-content d-flex justify-content-between" data-toggle="collapse"
+                    href="#collapseShipping" role="button" aria-expanded="false" aria-controls="collapseShipping">
+                    <span class="subtitle-detail">Envios</span>
+                    <i class="fas fa-plus plus-icon"></i>
+                </a>
+                <div class="collapse width-content" id="collapseShipping">
+                    <div class="card card-body">
+                        <%= product.shipping %>
+                    </div>
+                </div>
+
+                <a class="inline-block-detail width-content d-flex justify-content-between" data-toggle="collapse"
+                    href="#collapsePolitic" role="button" aria-expanded="false" aria-controls="collapsePolitic">
+                    <span class="subtitle-detail">Politicas de Devolucion</span>
+                    <i class="fas fa-plus plus-icon"></i>
+                </a>
+                <div class="collapse width-content" id="collapsePolitic">
+                    <div class="card card-body">
+                        <%= product.returnPolitic %>
+                    </div>
+                </div>
+
+
+                <div class="row padding-button-detail d-flex justify-content-center">
+                    <% if (user) { %>
+                    <% if (product.user.id == user.id) { %>
+                    <div class="button-wrapper col-12 col-md-6 py-1">
+                        <a href="/products/edit/<%= product.id %> "><button class="btn btn-pink btn-block">
+                                Editar producto
+                            </button></a>
+                    </div>
+                    <% } else { %>
+
+                    <div class="button-wrapper col-12 col-md-6 py-1" style="max-width: 100%;">
+                        <button id=<%= product.id %> class="addToCart btn btn-pink btn-block">
+                            Agregar al carrito
+                        </button>
+                    </div>
+
+                    <div class="button-wrapper col-12 col-md-6 py-1">
+                        <button class="btn btn-pink btn-block">
+                            Agregar a la wishlist
+                        </button>
+                    </div>
+
+                    <% } %>
+                    <% } else { %>
+                    <div class="button-wrapper col-12 col-md-6 py-1" style="max-width: 100%;">
+                        <button id=<%= product.id %> class="addToCart btn btn-pink btn-block">
+                            Agregar al carrito
+                        </button>
+                    </div>
+
+                    <div class="button-wrapper col-12 col-md-6 py-1">
+                        <button class="btn btn-pink btn-block">
+                            Agregar a la wishlist
+                        </button>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <div class="container-fluid vh-50 py-3 pt-5">
+            <h3 class="title-post-detail">Tu match ideal!<span style='font-size:30px;'>&#128526;</span></h3>
+            <div class="row m-0 d-flex justify-content-center">
+                <% for(elem of match) { %>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center div-pd-art">
+                    <article class="product-card card my-2">
+                        <a href="/products/<%= elem.id %>">
+                            <% if (elem.images.length > 0) { %>
+                            <img class="img-product w-100" src="/img/products/<%= elem.images[0].route%>"
+                                alt="<%= product.name %>" />
+                            <% } else { %>
+                            <img class="img-product w-100" src="https://place-hold.it/500x500" alt="">
+                            <% } %>
+                            <h3 class="card-title text-center">
+                                <%= elem.name %>
+                            </h3>
+                            <p class="text-center">
+                                <span class="price-symbol"><%= toThousand(elem.price) %></span>
+                            </p>
+                            <div class="d-flex justify-content-center">
+                                <p class="text-center  color-style upper-category">
+                                    <%= elem.category.name %></p>
+                            </div>
+                        </a>
+                        <div class="d-flex justify-content-center">
+                            <button id=<%= elem.id %> class="btn-cart-match addToCart btn btn-pink">
+                                Agregar al carrito
+                            </button>
+                        </div>
+
+                    </article>
+                </div>
+
+
+                <% } %>
+            </div>
+        </div>
+
+        <div class="related container-fluid vh-50 py-3">
+            <h3 class="title-post-detail">Mas productos de <a href="/products/brand/<%= product.brand.id %>"><span
+                        class="hover-btn-anchor"><%= product.brand.name %></span></a></h3>
+            <div class=" row m-0">
+                <% for(elem of sameBrand) { %>
+                <div class="col-12 col-sm-6 col-md-3 col-lg-3 d-flex justify-content-center div-pd-art">
+                    <article class="product-card card my-2">
+                        <a href="/products/<%= elem.id %>">
+
+                            <% if (elem.images.length > 0) { %>
+                            <img class="img-product w-100" src="/img/products/<%= elem.images[0].route%>"
+                                alt="<%= product.name %>" />
+                            <% } else { %>
+                            <img class="img-product w-100" src="https://place-hold.it/500x500" alt="">
+                            <% } %>
+                            <h3 class="card-title text-center">
+                                <%= elem.name %>
+                            </h3>
+                            <p class="text-center">
+                                <span class="price-symbol"><%= toThousand(elem.price) %></span>
+                            </p>
+                            <div class="d-flex justify-content-center">
+                                <p class="text-center color-style upper-category"><%= product.category.name %></p>
+                            </div>
+                        </a>
+                    </article>
+                </div>
+                <% } %>
+            </div>
+        </div>
+
+
+
+        <div class="related container-fluid vh-50 py-3">
+            <h3 class="title-post-detail">Mas de <a href="/<%= product.category.name %>"><span
+                        class="upper-category"><%= product.category.name %></span></a></h3>
+            <div class="row m-0">
+                <% for(elem of related) { %>
+                <div class="col-12 col-sm-6 col-md-3 col-lg-3 d-flex justify-content-center div-pd-art">
+                    <article class="product-card card my-2">
+                        <a href="/products/<%= elem.id %>">
+
+                            <% if (elem.images.length > 0) { %>
+                            <img class="img-product w-100" src="/img/products/<%= elem.images[0].route%>"
+                                alt="<%= product.name %>" />
+                            <% } else { %>
+                            <img class="img-product w-100" src="https://place-hold.it/500x500" alt="">
+                            <% } %>
+                            <h3 class="card-title text-center">
+                                <%= elem.name %>
+                            </h3>
+                            <p class="text-center">
+                                <span class="price-symbol"><%= toThousand(elem.price) %></span>
+                            </p>
+                        </a>
+                    </article>
+                </div>
+                <% } %>
+            </div>
+        </div>
+    </main>
+
+    <%- include("partials/footer") %>
+</body>
+
+</html>

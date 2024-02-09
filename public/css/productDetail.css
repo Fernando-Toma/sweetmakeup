@@ -1,0 +1,178 @@
+.product-card-principal a {
+  color: black;
+  text-decoration: none;
+}
+
+.product-card-principal {
+  width: 65%;
+  border-radius: 10px;
+}
+
+.product-card a {
+  color: black;
+  text-decoration: none;
+}
+
+.product-card {
+  width: 80%;
+  border-radius: 10px;
+}
+
+.product-card:hover {
+  -webkit-box-shadow: -1px 9px 40px -12px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -1px 9px 40px -12px rgba(0, 0, 0, 0.75);
+  box-shadow: -1px 9px 40px -12px rgba(0, 0, 0, 0.75);
+}
+
+.div-pd-art {
+  padding: 0;
+}
+
+.button-wrapper a {
+  text-decoration: none;
+}
+
+.img-detail-product {
+  max-width: 100%;
+  height: auto;
+  padding: 20px;
+}
+
+.padding-title-detail {
+  padding: 15px;
+}
+
+.padding-row-detail {
+  padding: 20px;
+  padding-left: 100px;
+}
+
+.price-style {
+  font-size: 28px;
+  color: #fe452a;
+}
+
+.inline-block-detail {
+  display: block;
+  padding: 6px;
+  border-bottom: 1px solid #c0c0c0;
+}
+
+.inline-block-detail a {
+  text-decoration: none;
+}
+
+.subtitle-detail {
+  font-size: 20px;
+  color: #dc92a5;
+}
+
+.plus-icon {
+  color: #dc92a5;
+}
+
+.padding-button-detail {
+  padding-top: 35px;
+  width: 70%;
+}
+
+.icon-arrow {
+  margin-right: 5px;
+  color: #dc92a5;
+}
+
+.pd-arrow {
+  padding-left: 5px;
+}
+
+.upper-first-letter {
+  text-transform: uppercase;
+}
+
+.container-color-detail {
+  background-color: #ededed;
+  margin: 0;
+  padding-bottom: 140px;
+}
+
+.title-post-detail {
+  padding-bottom: 25px;
+  padding-left: 50px;
+  padding-top: 20px;
+  font-size: 35px;
+}
+
+.color-title {
+  color: white;
+}
+
+.pd-container-video {
+  padding-bottom: 70px;
+  background-color: #dc92a5;
+}
+
+.img-product {
+  width: auto;
+  height: 45vh;
+  padding: 30px;
+}
+
+.name-product {
+  color: #716669;
+  margin-bottom: 0px;
+  padding-top: 10px;
+  text-decoration: none;
+}
+
+.price-product {
+  color: #716669;
+  margin-bottom: 0px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-decoration: none;
+}
+
+.price-symbol {
+  font-size: 18px;
+}
+
+.price-symbol::before {
+  content: "$";
+}
+
+.upper-category {
+  text-transform: uppercase;
+}
+
+.hover-btn-anchor {
+  text-decoration: none;
+}
+
+.color-style {
+  width: 30%;
+  background-color: pink;
+  color: #e30052;
+  border-radius: 5px;
+}
+
+.tag-style {
+  font-size: 12px;
+  background-color: pink;
+  color: #0d2821;
+  text-transform: uppercase;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.tag-style:hover {
+  color: #e30052;
+}
+
+.btn-cart-match {
+  margin: 15px;
+  width: 70%;
+}
+
+.width-content {
+  width: 70%;
+}
